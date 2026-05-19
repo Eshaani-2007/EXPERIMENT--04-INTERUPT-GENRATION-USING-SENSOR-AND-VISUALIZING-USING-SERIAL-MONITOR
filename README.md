@@ -1,8 +1,8 @@
-###  DATE: 
+###  DATE: 18.05.2026
 
-###  NAME: 
-###  ROLL NO :
-###  DEPARTMENT: 
+###  NAME: ESHAANI.S
+###  ROLL NO : 212225220031
+###  DEPARTMENT: IT
 
 
 # EXPERIMENT--04-INTERUPT-GENRATION-USING-SENSOR-AND-VISUALIZING-USING-SERIAL-MONITOR
@@ -119,14 +119,50 @@ The diagram below shows how the GPIO pins are connected to the 16 interrupt line
 
 ## STM 32 CUBE PROGRAM :
 
+~~~
+include "main.h"
+#include "stdio.h"
+int __io_putchar(int ch)
+{
+  HAL_UART_Transmit(&huart2, (uint8_t *)&ch, 1, HAL_MAX_DELAY);
+  return ch;
+}
+UART_HandleTypeDef huart2;
 
+void SystemClock_Config(void);
+static void MX_GPIO_Init(void);
+static void MX_USART2_UART_Init(void);
+
+int main(void)
+{
+    HAL_Init();
+
+    SystemClock_Config();
+
+    MX_GPIO_Init();
+    MX_USART2_UART_Init();
+    while (1)
+  {
+    
+  }
+  }
+void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
+{
+	if(HAL_GPIO_ReadPin(GPIOB,GPIO_PIN_4)==1)
+	{
+		printf("Interrupt Generated\n");
+	}
+}
+~~~
 
 ## Output screen shots of serial port utility   :
- 
+ <img width="1920" height="1080" alt="Screenshot 2026-05-18 095742" src="https://github.com/user-attachments/assets/cd08356c-3e03-4b56-9870-fc50c4d7b19c" />
+
  
  ## Circuit board :
  
- 
+ <img width="1200" height="1600" alt="image" src="https://github.com/user-attachments/assets/0eeef8af-ff14-4f30-83e7-ca3e0b3acd71" />
+
  
 ## Result :
 Interfacing a  IR SENSOR and interrupt is generated using external interrupt mode , visualized on serial port 
